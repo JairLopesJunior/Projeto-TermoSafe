@@ -1,0 +1,130 @@
+body{
+	width: 100%;
+	height: 100%;
+}
+
+#myNavbar{
+    background-color: #dcdcdc;
+    height: 80px;
+}
+
+#myTextNavbar{
+    color: red;
+    font-size: 35px;
+    font-family: 'Indie Flower', cursive;
+    text-decoration:none;
+    display: flex;
+	justify-content: center;
+}
+
+#myLogoNavbar{
+	width: 125px;
+	height:55px;
+}
+
+#myLogoIcons{
+	width: 50px;
+	height:  35px;
+	margin: 5px;
+}
+
+#myLogoIcons2{
+	width: 38px;
+	height:36px;
+	margin: 5px;
+	margin-left: 5vh;
+	margin-right: 7vh;
+}
+
+#myRow{
+    padding-top: 10%;
+}
+
+#myIcons{
+	text-decoration:none;
+	color: #ffffff;
+}
+#myIcons{
+	text-decoration:none;
+	color: #ffffff;
+	padding-left: 50%;
+}
+
+#myRowButton{
+	padding-top: 1%;
+	display: flex;
+	justify-content: center;
+}
+
+#myButton{
+	background-color: #000000;
+	border-color: #000000;
+	color: #ffffff;
+	margin-bottom: 5%;
+}
+
+#navbarLogo{
+	display: flex;
+	justify-content: flex-start;
+}
+
+#navbarIcons{
+	display: flex;
+	justify-content: flex-end;
+}
+
+#myImage{
+	height: 250px;
+}
+
+#myModalImage{
+	height: 400px;
+}
+
+#myModalButton{
+	background-color: red;
+	border-color: red;
+	color: #ffffff;
+}
+
+#myDivImage{
+	display: flex;
+	justify-content: center;
+}
+
+/* ============================================== */
+
+#cardGrafico{
+	width: 60rem;
+}
+
+#divCardGrafico{
+	display: flex;
+	justify-content: center;
+	text-align: center;
+	padding-top: 2%;
+}
+
+#corDropdownActive{
+	background-color: red;
+}
+
+/* ============================================== */
+
+#myRowCenter{
+	display: flex;
+	justify-content: center;
+}
+
+#myRowCenterText{
+	display: flex;
+	justify-content: center;
+	padding-top: 2%;
+	padding-bottom: 1%;
+}
+
+#titulo{
+	margin: 55px;
+	font-family: arial;
+	font-size: 5vh;
+}

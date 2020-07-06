@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <title>TermoSafe - Home</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Aladin" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script type="text/javascript "src="/socket.io/socket.io.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+
+    <style type="text/css">
+        #temperatura{
+            top: 150px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body style="overflow-x: hidden">
+	<!--Menu do Site-->
+    <nav class="navbar navbar-expand-lg " id="myNavbar">
+        <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-11" id="navbarLogo">
+            <a href="index.html" id="myTextNavbar">
+                <img src="image/termosafe.png" id="myLogoNavbar">
+            </a>
+        </div>
+        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1" id="navbarIcons">   
+            <div class="dropdown show">
+                <a id="dropdownMenuLink" data-toggle="dropdown">
+                    <img id="myLogoIcons" src="image/relatorio.svg">
+                </a>
+                <div id="tipo_documento" style="text-align: center;" name="tipo_documento" class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="widows: 10px">
+                    <a class="dropdown-item" onmouseover="this.style.color='#0F0'" onmouseout="this.style.color='#00F'" value="" disabled="disabled" selected="selected" href="#">Tipos de Documentos</a>
+                    <a class="dropdown-item" onmouseover="this.style.color='#0F0'" onmouseout="this.style.color='#00F'" href="temperatura.pdf" download id="btnBaixarModelo" name="btnBaixarModelo" class="btn bg-purple form-control pull-right"  title="Baixar Modelo" href="#">PDF</a>
+                    <a class="dropdown-item" onmouseover="this.style.color='#0F0'" onmouseout="this.style.color='#00F'" href="temperatura.txt" download id="btnBaixarModelo" name="btnBaixarModelo" class="btn bg-purple form-control pull-right"  title="Baixar Modelo" href="#">TXT</a>
+                    <a class="dropdown-item" onmouseover="this.style.color='#0F0'" onmouseout="this.style.color='#00F'" href="temperatura.doc" download id="btnBaixarModelo" name="btnBaixarModelo" class="btn bg-purple form-control pull-right"  title="Baixar Modelo" href="#">DOC</a>
+                </div>
+            </div>
+            <a href="configuracoes.html" id="myIcons">
+                <img src="image/engrenagem.png" id="myLogoIcons2">
+            </a>
+        </div>
+    </nav>
+
+	<div class="col-xl-12 col-lg-12 col-md-12 col-sm-12" align="center">  
+    	<input id="sla" class="caixa_texto" style="width:100px;box-shadow: 0 0 0 0;
+    border: 0 none; outline: 0; font-size: 70px; margin-top: 5vh;" type="text" value="0"><h1 style="font-size: 70px; position: relative;top: -15vh;left: 45px;">º</h1>
+	</div>
+
+	<!--Gráfico de Temperatura-->    
+	<div class="container" style="position: relative; bottom: 10vh">
+	    <canvas id="chart" width="800" height="350" style="margin-bottom: 1vh"></canvas>
+	        <script type="text/javascript">
+	            var socket = io.connect()
+	            var ctx = document.getElementById('chart').getContext('2d')
+	            var data = {
+	            labels: [0],
+		            datasets: [{
+		           	data: [0],
+		            label: 'Temperatura', 
+		            backgroundColor: 'rgba(77,166,253,0.85)'
+		            }]
+	        	}       	
+	                                                
+	            var optionsAnimations = { 
+	            	animation: false,
+	                scales: {
+	                    yAxes : [{
+	                        ticks : {
+	                            max : 35,  
+	                            stepSize: 1,
+	                            min : 20
+	                        }
+	                    }]
+	                },
+				        annotations: [{
+				            type: 'line',
+				            mode: 'horizontal',
+				            scaleID: 'y-axis-0',
+				            value: '26',
+				            borderColor: 'tomato',
+				            borderWidth: 1
+				        }],
+				        drawTime: "afterDraw"
+	           	};
+	            var chart = new Chart(ctx, {
+	                type: 'line',
+	                data: data,
+	                options: optionsAnimations
+	            })
+				socket.on('temperature', function (value) {
+	                var length = data.labels.length
+	                if (length >= 10) {
+	                	data.datasets[0].data.shift()
+	                    data.labels.shift()
+
+	                }
+					data.labels.push(moment().format('HH:mm:ss'))
+	                data.datasets[0].data.push(value)
+					chart.update()
+					var a = value; 
+					document.getElementById('sla').value = a;
+	            })
+	    	</script>
+    	</div>
+                         
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
+        crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <script src="main.js" charset="utf-8"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.2/Chart.js"></script> 
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@0.5.7/src/index.min.js"></script>
+
+
+</body>
+
+</html>

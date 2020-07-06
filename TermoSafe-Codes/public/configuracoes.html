@@ -1,0 +1,150 @@
+<!Doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <title>TermoSafe - Configurações</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Aladin" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Indie+Flower" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- Materilize -->
+    <!--Import Google Icon Font-->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <!--Import materialize.css-->
+    <link type="text/css" rel="stylesheet" href="materialize/css/materialize.min.css"  media="screen,projection"/>
+    <script src="https://code.jquery.com/jquery-3.4.0.js" integrity="sha256-DYZMCC8HTC+QDr5QNaIcfR7VSPtcISykd+6eSmBW5qo=" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+        <!--Eventos do Jquery-->
+    <div id="div1" style="display: none;position: absolute;z-index: 100;width: 100%;text-align: center; position: fixed;" class="alert alert-success" role="alert">
+        Dados alterados com sucesso.
+    </div>
+    <div id="a" style="display: none;position: absolute;z-index: 100;width: 100%;text-align: center; position: fixed;" class="alert alert-danger" role="alert">
+        Erro ao Salva os dados: A temperatura maxíma não pode ser menor que a miníma.
+    </div>
+
+    <nav class="navbar navbar-expand-lg " id="myNavbar">
+        <div class="col-xl-11 col-lg-11 col-md-11 col-sm-11 col-11" id="navbarLogo">
+            <a href="index.html" id="myTextNavbar">
+                <img src="image/termosafe.png" id="myLogoNavbar">             
+            </a>
+        </div>
+        <div class="col-xl-1 col-lg-1 col-md-1 col-sm-1 col-1" id="navbarIcons">   
+            <div class="dropdown show">
+                <a id="dropdownMenuLink" data-toggle="dropdown">
+                    <img id="myLogoIcons" src="image/relatorio.svg">
+                </a>
+                <div id="tipo_documento" style="text-align: center;" name="tipo_documento" class="dropdown-menu" aria-labelledby="dropdownMenuLink" style="widows: 10px">
+                    <a class="dropdown-item" onmouseover="this.style.color='#0F0'" onmouseout="this.style.color='#00F'" value="" disabled="disabled" selected="selected" href="#">Tipos de Documentos</a>
+
+                    <a class="dropdown-item" href="temperatura.pdf" onmouseover="this.style.color='#0F0'" onmouseout="this.style.color='#00F'" download id="btnBaixarModelo" name="btnBaixarModelo" class="btn bg-purple form-control pull-right"  title="Baixar Modelo">PDF</a>
+
+                    <a class="dropdown-item" onmouseover="this.style.color='#0F0'" onmouseout="this.style.color='#00F'" href="temperatura.txt" download id="btnBaixarModelo" name="btnBaixarModelo" class="btn bg-purple form-control pull-right"  title="Baixar Modelo">TXT</a>
+
+                    <a class="dropdown-item" onmouseover="this.style.color='#0F0'" onmouseout="this.style.color='#00F'" href="temperatura.doc" download id="btnBaixarModelo" name="btnBaixarModelo" class="btn bg-purple form-control pull-right"  title="Baixar Modelo">DOC</a>
+                </div>
+            </div>
+            <a href="configuracoes.html" id="myIcons">
+                <img src="image/engrenagem.png" id="myLogoIcons2">
+            </a>
+        </div>
+    </nav>
+
+    <div class="row">
+        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12" id="divCardGrafico">
+            <div class="card shadow-lg p-3 mb-5 bg-white rounded" id="cardGrafico">
+                <div class="card-body">
+                    <div class="row" id="myRowCenter">
+                        <div class="col-xl-8 col-lg-8 col-md-8 col-sm-12 col-12">
+                            <h1 id="titulo">CONFIGURAÇÕES</h1>
+                            <form class="forme" method="GET">
+                                <div class="form-group">
+                                    <small id="emailHelp" class="form-text text-muted">Email onde serão enviadas as
+                                        notificações.</small>
+                                    <div>
+							        	<input type="email" placeholder="Email:"/>
+							      	</div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row" id="myRowCenterText">
+                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                                <small id="emailHelp" class="form-text text-muted">Defina a faixa de temperatura ideal para seu equipamento:</small>
+                            </div>
+                        </div><br>
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-3">
+                                    Temperatura Máxima:
+                                </div>
+                                <div class="col-xl-8 col-lg-8 col-md-6 col-sm-3">
+                                    <p class="range-field">
+                                        <input type="range" id="tempmax" name="tempmax" min="0" max="100"/>
+                                    </p><br>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xl-4 col-lg-4 col-md-6 col-sm-3">
+                                    Temperatura Mínima:
+                                </div>
+                                <div class="col-xl-8 col-lg-8 col-md-6 col-sm-3">
+                                    <p class="range-field">
+                                        <input type="range" id="tempmin" name="tempmin" min="0" max="100"/>
+                                    </p><br>
+                                </div>
+                            </div>
+                                <input type="submit" id="myButton" value="Cadastrar"/>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+        integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+        crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+        crossorigin="anonymous"></script>
+    <!-- Materilize -->
+    <script type="text/javascript" src="materialize/js/materialize.min.js"></script>
+
+    <!--JQuery-->
+    <script>
+        $(document).ready(function() {
+            $("form").submit(function(event) {
+                var tempma = document.getElementById('tempmax').value;
+                var tempmi = document.getElementById('tempmin').value;
+
+                if(tempma < tempmi) {
+                        $("#a").fadeIn();
+						setInterval(function(){
+ 							$("#a").fadeOut();
+						}, 5000);
+                }else{
+                        $("#div1").fadeIn();
+                        	setInterval(function(){
+ 							$("#div1").fadeOut();
+						}, 5000);
+                }
+                event.preventDefault();
+            });
+        });
+
+        $('#frmOrcamento #tipo_documento').on('change',function(){
+            var url = $(this).val();$('#frmOrcamento #btnBaixarModelo').attr({'href':url});
+        })
+    </script>
+</body>
+
+</html>
